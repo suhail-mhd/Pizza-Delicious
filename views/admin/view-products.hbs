@@ -1,0 +1,78 @@
+<body>
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Product List</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Products</li>
+          <li class="breadcrumb-item active">Product List</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card glass-blur p-3">
+            <div class="card-body">
+
+              <!-- Table with stripped rows -->
+              <table class="table datatable text-light" id="productTable">
+                <thead>
+                  <tr style="background: transparent">
+                    <th class="text-warning" scope="col">no</th>
+                    <th class="text-warning" scope="col">Image</th>
+                    <th class="text-warning" scope="col">Name</th>
+                    <th class="text-warning" scope="col">Category</th>
+                    <th class="text-warning" scope="col">Quantity</th>
+                    <th class="text-warning" scope="col">Description</th>
+                    <th class="text-warning" scope="col">Price</th>
+                    {{!-- <th class="text-warning" scope="col">Old Price</th> --}}
+                    <th class="text-warning" scope="col">Discount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                  <tr>
+                    <th class="text-light" scope="row">{{inc @index}}</th>
+                    <td><img src="/add-product/{{this._id}}.jpg" alt="" style="border-radius: 100%; width:50px; height:50px"></td>
+                    <td>{{this.productname}}</td>
+                    <td>{{this.category}}</td>
+                    <td>{{this.quantity}}</td>
+                    <td>{{this.description}}</td>
+                    <td><i class="bx bx-rupee"></i>{{this.price}}</td>
+                    {{!-- <td><i class="bx bx-rupee"></i>{{this.OldPrice}}</td>
+                    <td>{{this.offerPercentage}}%</td> --}}
+                     <td>
+                  {{#if ProductOffer}}
+                  <h5 class="pt-2">
+                    <button  class="btn btn-success" style="border-radius: 20px;">{{this.offerPercentage}} % OFF</button>
+                  </h5>
+                  {{else}}
+                  <a class="pt-2" href="/admin/add-product-offer/{{this._id}}"  type="submit"> <button type="button" class="btn btn-warning">Add Offer</button></a>
+                  
+                  {{/if}}
+                  
+              </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+
+
+</body>

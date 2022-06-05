@@ -1,0 +1,223 @@
+<div class="row my-5">
+  <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="row glass-blur py-5">
+        <div class="container">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                {{!-- <div class="card"> --}}
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
+                                class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h4>{{User.name}}</h4>
+                                {{!-- <button class="btn btn-primary">Follow</button> --}}
+                            </div>
+                        </div>
+                    </div>
+                {{!-- </div> --}}
+                <div class="mt-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                            <a href="/profile">My Profile</a>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                            <a href="/view-address">Address</a>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                            <a href="/order-status"> My Orders</a>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                            <a href="/coupons-offers">Coupons and Offers</a>
+                        </li>
+                        <li class="d-flex justify-content-between align-items-center flex-wrap mb-2">
+                            <a href="/wallet" style="color: #FAC564;">Wallet</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="glass-blur" style="margin: auto;">
+                    <div class=""
+                        style="margin-left: 20px;padding-bottom: 15px; padding-top: 15px;">
+                        <div class="col-6 pl-sm-4">
+                            <div class="d-flex">
+                                <img style="height: 50px;"
+                                src="https://lh3.googleusercontent.com/ohLHGNvMvQjOcmRpL4rjS3YQlcpO0D_80jJpJ-QA7-fQln9p3n7BAnqu3mxQ6kI4Sw"
+                                alt="wallet">
+                            <h4 style="color: #FAC564;text-align: center;"> Total Available Wallet Amount</h4>
+                            </div>
+                            <div style="text-align: center;padding-top: 10px;">
+                                {{#if wallet}}
+                                <p class="text-light"><i class="bx bx-rupee"></i> {{wallet}}</p>
+                                {{else}}
+                                    <p class="text-light">Your wallet is empty</p>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="glass-blur py-3" style="margin: auto;">
+                    <div class=""
+                        style="margin-left: 20px;padding-bottom: 15px; padding-top: 15px;">
+                        <div id="sectionC" class="tab-pane">
+                    <div class="container">
+                        <div class="row mt-2 mb-30">
+                            <div class="col-sm-12 col-md-3">
+                                <div class="share-boxes">
+                                    <img src="https://i.ibb.co/PtYrLNy/img1.png" alt="img1" border="0" style="width: 100px;">
+                                    <p class="text-light mt-3">Get Referal Link</p>
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-sm-12 col-md-3">
+                                <div class="share-boxes">
+                                    <img src="https://i.ibb.co/P5TdfkT/img2.png" alt="img2" border="0" style="width: 100px;">
+                                    <p class="text-light mt-3">Share your Referal Link</p>
+                                    <img src="https://i.ibb.co/Sr5F70S/dotted-arrow1.png" alt="dotted-arrow1"
+                                        class="dotted-line" style="        width: 85px;
+                                        margin-top: -13rem;
+                                        margin-left: -6rem;">
+                                    <img src="https://i.ibb.co/Fqs2KxB/dotted-arrow2.png" alt="dotted-arrow2"
+                                        class="dotted-line2" style="width: 85px;
+                                                margin-top: -14rem;
+                                                margin-left: 7rem;
+                                            ">
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col-sm-12 col-md-3">
+                                <div class="share-boxes">
+                                    <img src="https://i.ibb.co/StC3RWk/img3.png" alt="img3" border="0" style="width: 100px;">
+                                    <p class="text-light mt-3">Earn ₹100 from Signup</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row refer-form-sec">
+                            {{!-- <div class="col">
+                                <div class="refer-image">
+                                    <img src="/assets/images/refer.jpg" alt="big-image" border="0" style="width: 230px;"/>
+                                </div>
+                            </div> --}}
+                            <div class="col">
+                                <div class="refer-form">
+                                    <ul>
+                                        <li style="list-style-type: none;"><a style="background-color: #25D366;padding: 10px;
+    color: #fff;    margin-left: -32px; text-transform:uppercase;"
+                                                href="https://api.whatsapp.com/send?text={{referalLink}}"
+                                                data-action="share/whatsapp/share">Share via Whatsapp</a></li>
+                                    </ul>
+                                </div>
+                                <div class="refer-form-content">
+                                    <h2 style="color: #FAC564;">Refer your Friends</h2>
+                                    <p class="text-light">Copy the below URL and Share it with your friends NOW!</p>
+                                    <div class="mb-2">
+                                        <input type="text" name="Your Name mb-2" id="myInput" style="width: 100%;" value="{{referalLink}}" disabled><br>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-dark" style="border-radius: 20px;" onclick="copyFunction()">Copy the URL</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+             </div>
+
+    </div>
+</div>
+<style>
+    body {
+        color: #1a202c;
+        text-align: left;
+        background-color: #e2e8f0;
+    }
+
+    .main-body {
+        padding: 15px;
+    }
+
+    .card {
+        box-shadow: 0 1px 3px 0 rgba(248, 245, 245, 0.1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+    }
+
+    .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid rgba(247, 247, 247, 0.125);
+        border-radius: .25rem;
+    }
+
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1rem;
+    }
+</style>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+
+
+{{!-- <script>
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script> --}}
+
+<script>
+        function copyFunction() {
+            /* Get the text field */
+            var copyText = document.getElementById("myInput");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+
+            var toastMixin = Swal.mixin({
+                toast: true,
+                icon: 'success',
+                title: 'General Title',
+                animation: false,
+                position: 'bottom',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            toastMixin.fire({
+                animation: true,
+                title: 'Copied to Clipboard'
+            });
+        }
+    </script>

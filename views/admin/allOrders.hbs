@@ -1,0 +1,482 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>All Orders</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Orders</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+<div class="main_content_iner ">
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                {{!-- <h3 class="m-0">All Orders</h3> --}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body">
+                        <div class="QA_section">
+                            <div class="white_box_tittle list_header">
+                                <div class="box_right d-flex lms_block">
+                                    <div class="serach_field_2">
+                                        <div class="search_inner">
+                                            {{!-- <form Active="#">
+                                                <div class="search_field">
+                                                    <input type="text" placeholder="Search content here...">
+                                                </div>
+                                                <button type="submit"> <i class="ti-search"></i> </button>
+                                            </form> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card glass-blur p-3  QA_table mb_30">
+                                <!-- table-responsive -->
+                                <table class="table lms_table_active3 text-light" id="productTable">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-warning" scope="col">No</th>
+                                            <th class="text-warning" scope="col">Order ID</th>
+                                            <th class="text-warning" scope="col">User</th>
+                                            {{!-- <th class="text-warning" scope="col">Address</th> --}}
+                                            <th class="text-warning" scope="col">Total Amount</th>
+                                            <th class="text-warning" scope="col">Payment Method</th>
+                                            <th class="text-warning" scope="col">Date</th>
+                                            <th class="text-warning" scope="col">Status</th>
+                                            <th class="text-warning" scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{!-- <input value={{allOrders}} hidden id="fulldata"> --}}
+                                        {{#each allOrders}}
+                                        <tr>
+                                           
+                                            <th class="text-light" scope="row">{{inc @index}}</th>
+                                            <td>{{this._id}}</td>
+                                            <td>{{this.deliveryDetails.firstname}} {{this.deliveryDetails.lastname}}</td>
+                                            {{!-- <td>{{this.deliveryDetails.address}}</td> --}}
+                                            <td>{{this.totalAmount}}</td>
+                                            <td>{{this.paymentMethod}}</td>
+                                            <td>{{this.date}}</td>
+
+                                        <div class="modal" id={{this._id}} data-animation="slideInOutLeft">
+                                                
+                                            <div class="modal-dialog">
+                                                <header class="modal-header">
+                                                {{!-- The header of the first modal --}}
+                                                <button class="close-modal" aria-label="close modal" data-close="">
+                                                    ✕  
+                                                </button>
+                                                </header>
+                                                <section class="modal-content">
+                                                    <div>
+                                                        <h4 style="color: #FAC564;">Order Items</h4>
+                                                        <ul class="productList-{{this._id}}">
+                                                            {{#each this.products}}
+                                                                
+                                                                    <li class="ms-3">
+                                                                    <span class="proName">{{this.name}}</span>
+                                                                   <br>Qty <span class="proQty">{{this.quantity}}</span>
+                                                                    </li>
+                                                                
+                                                            
+                                                                
+                                                            {{/each}}
+                                                            </ul>
+                                                        <p>Total Amount: {{this.totalAmount}}</p>
+                                                        {{#if this.status}}
+                                                            <p style="color: orange;">Delivery Status: {{this.status}}</p>
+                                                        {{/if}}
+                                                        {{#if this.shippedStatus}}
+                                                            <p style="color: yellow;">Delivery Status: Shipped</p>
+                                                        {{/if}}
+                                                        {{#if this.cancelStatus}}
+                                                            <p style="color: red;">Delivery Status: Cancelled</p>
+                                                        {{/if}}
+
+                                                        {{#if this.deliveryStatus}}
+                                                            <p style="color: green;">Delivery Status: Delivered</p>
+                                                        {{/if}}
+                                                    </div>
+                                                <div style="margin-top: 8px;">
+                                                                <h4 style="color: #FAC564;">Delivery Address</h4>
+                                                                
+                                                                <div class="" style="width:100%;border-radius: 10px; border-style:double;border-color: white;">
+                                                                    <dl style="margin-left: 10px;">
+                                                                        <dt style="margin: 5px;">{{this.deliveryDetails.firstname}}</dt>
+                                                                        <dt style="margin: 5px;">{{this.deliveryDetails.lastname}}</dt>
+                                                                        <dt style="margin: 5px;">{{this.deliveryDetails.address}},{{this.deliveryDetails.city}}</dt>
+                                                                        <dt style="margin: 5px;">{{this.deliveryDetails.country}},{{this.deliveryDetails.zipcode}}</dt>
+                                                                        <dt style="margin: 5px;">{{this.deliveryDetails.tel}}</dt>
+                                                                        <dt>Payment Method: {{this.paymentMethod}}</dt>
+                                                                    </dl>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <button  style="border-radius: 20px; margin-left:15rem; width:30%;" class="btn btn-warning p-1 mt-2" onclick="invoice('{{this._id}}')">Invoice</button>
+
+                                                    <script>
+                                                        
+                                                        function invoice(id) {
+                                                            console.log(id)
+
+                                                            {{!-- let content = document.getElementsByClassName('productList-'+id);
+
+                                                            console.log(content) --}}
+                                                            
+                                                            $.ajax({
+                                                        success:(response) => {
+                                                            var data = {
+                                                                //"documentTitle": "RECEIPT", //Defaults to INVOICE
+                                                                "currency": "USD",
+                                                                "taxNotation": "vat", //or gst
+                                                                "marginTop": 25,
+                                                                "marginRight": 25,
+                                                                "marginLeft": 25,
+                                                                "marginBottom": 25,
+                                                                "images": {
+                                                                    // The logo on top of your invoice
+                                                                    "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
+                                                                    // The invoice background
+                                                                    "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg"
+                                                                },
+                                                                "sender": {
+                                                                    "company": "Pizza Delicious",
+                                                                    "address": "Padamugal - Palachuvadu Rd, Satellite Twp, Padamughal, Kakkanad, Kerala",
+                                                                    "zip": "682037",
+                                                                    "city": "Ernakulam",
+                                                                    "country": "India"
+                                                                    //"custom1": "custom value 1",
+                                                                    //"custom2": "custom value 2",
+                                                                    //"custom3": "custom value 3"
+                                                                },
+                                                                "client":
+                                                                {
+                                                                    "company": "{{this.deliveryDetails.firstname}} {{this.deliveryDetails.lastname}}",
+                                                                    "address": "{{this.deliveryDetails.address}}",
+                                                                    "zip": "{{this.deliveryDetails.zipcode}}",
+                                                                    "city": "{{this.deliveryDetails.city}}",
+                                                                    "country": "{{this.deliveryDetails.country}}"
+                                                                    //"custom1": "custom value 1",
+                                                                    //"custom2": "custom value 2",
+                                                                    //"custom3": "custom value 3"
+                                                                },
+                                                                "information": {
+                                                                    // Invoice number
+                                                                    "number": "2021.0001",
+                                                                    // Invoice data
+                                                                    "date": "12-12-2021"
+                                                                },
+                                                                "products": [
+                                                                {{#each this.products}}
+                                                                    {
+                                                                        "quantity": "{{this.quantity}}",
+                                                                        "description": "{{this.name}}",
+                                                                        "tax": 6,
+                                                                        "price": '{{this.totalAmount}}'
+                                                                    },
+                                                                {{/each}}
+                                                                ],
+                                                                "bottom-notice": "Kindly pay your invoice within 15 days."
+                                                            };
+                                                            
+                                                            //Create your invoice! Easy!
+                                                            easyinvoice.createInvoice(data, function (result) {
+                                                                //The response will contain a base64 encoded PDF file
+                                                                console.log(result.pdf);
+                                                                easyinvoice.download('invoice.pdf')
+                                                            });
+                                                            }
+                                                            })
+                                                                
+                                                            }
+                                                    </script>
+                                                           
+                                                </section>
+                                            </div>
+                                        </div>
+
+                                            {{#if this.status}}
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false"> {{this.status}}
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a style="color: rgb(238, 222, 82);" class="dropdown-item"
+                                                         href="/admin/status-change?status=shipped&id={{this._id}}">Shipped</a>
+
+                                                        <a style="color: green;" class="dropdown-item"
+                                                         href="/admin/status-change?status=delivered&id={{this._id}}">Delivered</a>
+
+                                                        <a style="color: red;" class="dropdown-item"
+                                                            href="/admin/status-change?status=cancel&id={{this._id}}">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            {{/if}}
+
+                                            {{#if this.shippedStatus}}
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false"> Shipped
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a style="color: green;" class="dropdown-item"
+                                                         href="/admin/status-change?status=delivered&id={{this._id}}">Delivered</a>
+
+                                                        <a style="color: red;" class="dropdown-item"
+                                                            href="/admin/status-change?status=cancel&id={{this._id}}">Cancel</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            {{/if}}
+
+                                            {{#if this.cancelStatus}}
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-danger ">
+                                                        Cancelled
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            {{/if}}
+
+                                            {{#if this.deliveryStatus}}
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success ">
+                                                        Delivered
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            {{/if}}
+
+                                            <td>
+                                                <button type="button" class="open-modal btn btn-outline-warning text-warning p-2" data-open={{this._id}}>
+                                                    Details
+                                            </button></td>
+
+                                        </tr>
+                                        
+  
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    :root {
+  --lightgray: #efefef;
+  --blue: steelblue;
+  --white: #fff;
+  --black: rgba(0, 0, 0, 0.8);
+  --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+.modal-content {
+    background-color: transparent;
+}
+    .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--black);
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.35s ease-in;
+}
+
+.modal.is-visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: #fff;
+    margin-left: 21rem;
+}
+
+.modal-dialog {
+  position: relative;
+  max-width: 800px;
+  max-height: 80vh;
+  backdrop-filter: blur(5px);  
+    background: rgba(255, 255, 255, 0.1);  
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);  
+    border: 1px solid rgba(255, 255, 255, 0.5);  
+    border-right: 1px solid rgba(255, 255, 255, 0.2);  
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: #fff;
+  overflow: auto;
+  cursor: default;
+}
+
+.modal-dialog > * {
+  padding: 1rem;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header .close-modal {
+  font-size: 1rem;
+}
+
+.modal p + p {
+  margin-top: 1rem;
+}
+
+[data-animation="zoomInOut"] .modal-dialog {
+  transform: scale(0.2);
+}
+</style>
+  
+</main><!-- End #main -->
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" 
+        integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6" 
+        crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+
+<script>
+   const openEls = document.querySelectorAll("[data-open]");
+const closeEls = document.querySelectorAll("[data-close]");
+const isVisible = "is-visible";
+
+for (const el of openEls) {
+  el.addEventListener("click", function() {
+    const modalId = this.dataset.open;
+      console.log(modalId)
+    document.getElementById(modalId).classList.add(isVisible);
+  });
+}
+
+for (const el of closeEls) {
+  el.addEventListener("click", function() {
+    this.parentElement.parentElement.parentElement.classList.remove(isVisible);
+  });
+}
+
+document.addEventListener("click", e => {
+  if (e.target == document.querySelector(".modal.is-visible")) {
+    document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  }
+});
+
+document.addEventListener("keyup", e => {
+  // if we press the ESC
+  if (e.key == "Escape" && document.querySelector(".modal.is-visible")) {
+    document.querySelector(".modal.is-visible").classList.remove(isVisible);
+  }
+});
+</script>
+
+ {{!-- <script>
+    
+    function invoice(id) {
+        console.log(id)
+        $.ajax({
+      success:(response) => {
+           var data = {
+                                                                //"documentTitle": "RECEIPT", //Defaults to INVOICE
+                                                                "currency": "USD",
+                                                                "taxNotation": "vat", //or gst
+                                                                "marginTop": 25,
+                                                                "marginRight": 25,
+                                                                "marginLeft": 25,
+                                                                "marginBottom": 25,
+                                                                "images": {
+                                                                    // The logo on top of your invoice
+                                                                    "logo": "https://public.easyinvoice.cloud/img/logo_en_original.png",
+                                                                    // The invoice background
+                                                                    "background": "https://public.easyinvoice.cloud/img/watermark-draft.jpg"
+                                                                },
+                                                                "sender": {
+                                                                    "company": "Pizza Delicious",
+                                                                    "address": "Padamugal - Palachuvadu Rd, Satellite Twp, Padamughal, Kakkanad, Kerala",
+                                                                    "zip": "682037",
+                                                                    "city": "Ernakulam",
+                                                                    "country": "India"
+                                                                    //"custom1": "custom value 1",
+                                                                    //"custom2": "custom value 2",
+                                                                    //"custom3": "custom value 3"
+                                                                },
+                                                                "client":
+                                                                {
+                                                                    "company": "{{this.deliveryDetails.firstname}} {{this.deliveryDetails.lastname}}",
+                                                                    "address": "{{this.deliveryDetails.address}}",
+                                                                    "zip": "{{this.deliveryDetails.zipcode}}",
+                                                                    "city": "{{this.deliveryDetails.city}}",
+                                                                    "country": "{{this.deliveryDetails.country}}"
+                                                                    //"custom1": "custom value 1",
+                                                                    //"custom2": "custom value 2",
+                                                                    //"custom3": "custom value 3"
+                                                                },
+                                                                "information": {
+                                                                    // Invoice number
+                                                                    "number": "2021.0001",
+                                                                    // Invoice data
+                                                                    "date": "12-12-2021"
+                                                                },
+                                                                "products": [
+                                                                {{#each allOrders}}
+                                                                    {
+                                                                        "quantity": "{{products.quantity}}",
+                                                                        "description": "{{orders.productname}}",
+                                                                        "tax": 6,
+                                                                        "price": '{{this.totalAmount}}'
+                                                                    },
+                                                                    {{/each}}
+                                                                ],
+                                                                "bottom-notice": "Kindly pay your invoice within 15 days."
+                                                            };
+                                                            
+                                                            //Create your invoice! Easy!
+                                                            easyinvoice.createInvoice(data, function (result) {
+                                                                //The response will contain a base64 encoded PDF file
+                                                                console.log(result.pdf);
+                                                                easyinvoice.download('invoice.pdf')
+                                                            });
+      }
+    })
+                                                            
+                                                           
+    }
+</script> --}}
+

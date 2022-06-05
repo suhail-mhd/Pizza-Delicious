@@ -1,0 +1,166 @@
+<section class="sec">
+  <div class="colour"></div>
+  <div class="colour"></div>
+  <div class="colour"></div>
+  <div class="box">
+    <div class="square" style="--i:0;"></div>
+    <div class="square" style="--i:1;"></div>
+    <div class="square" style="--i:2;"></div>
+    <div class="square" style="--i:3;"></div>
+    <div class="square" style="--i:4;"></div>
+    <div class="container glass">
+      <div class="form">
+        <h2>Signup Form</h2>
+        <form action="/signup" method="post" id="registration_form">
+          <div class="input__box">
+            <input type="text" name="name" id="form_name" placeholder="Username" />
+							 <span class="error_form" id="name_error_message"></span>
+
+          </div>
+          <div class="input__box">
+            <input type="email" name="email" id="form_email" placeholder="Email" />
+							<span class="error_form" id="email_error_message"></span>
+
+          </div>
+          <div class="input__box">
+            <input type="password" name="password" id="form_password" placeholder="Password" />
+							<span class="error_form" id="password_error_message"></span>
+
+          </div>
+          <div class="input__box">
+          {{#if passwordError}}
+            <div class="text-danger">{{passwordError}}</div>
+          {{/if}}
+            <input
+              type="password"
+              id="form_retype_password"
+              name="confirmpassword"
+              placeholder="Confirm Password"
+            />
+          </div>
+          <div class="input__box">
+            <input type="tel" name="mobno" id="form_mob" placeholder="Mobile Number" />
+							<span class="error_form" id="mob_error_message"></span>
+
+          </div>
+          <div class="input__box">
+            <input type="submit" value="Sign Up" />
+          </div>
+          <a href="/login"><p class="forget">Already have account?</p> </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .error_form {
+    color: red;
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+$("#name_error_message").hide()
+$("#email_error_message").hide()
+$("#mob_error_message").hide()
+$("#password_error_message").hide()
+
+
+var error_name=false;
+var error_email=false;
+var error_mobno=false;
+var error_password=false;
+
+
+   		 $("#form_name").focusout(function(){
+            check_name();
+         });
+         $("#form_email").focusout(function() {
+            check_email();
+         });
+         $("#form_mob").focusout(function() {
+            check_mob();
+         });
+		 $("#form_password").focusout(function() {
+            check_password();
+         });
+         function check_name() {
+            var pattern = /^[a-zA-Z]*$/;
+            var name = $("#form_name").val();
+            if (pattern.test(name) && name !== '') {
+               $("#name_error_message").hide();
+               $("#form_name")
+            } else {
+               $("#name_error_message").html("Should contain only Characters");
+               $("#name_error_message").show();
+               $("#form_name")
+               error_name = true;
+            }
+         }
+		 function check_password() {
+            var pattern = /^^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            var password = $("#form_password").val();
+            if (pattern.test(password) && password !== '') {
+               $("#password_error_message").hide();
+               $("#form_password")
+            } else {
+               $("#password_error_message").html("Minimum eight characters, at least one letter and one number:");
+               $("#password_error_message").show();
+               $("#form_password")
+               error_password = true;
+            }
+         }
+
+         function check_email() {
+            var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var email = $("#form_email").val();
+            if (pattern.test(email) && email !== '') {
+               $("#email_error_message").hide();
+               $("#form_email")
+            } else {
+               $("#email_error_message").html("Invalid Email");
+               $("#email_error_message").show();
+               $("#form_email")
+               error_email = true;
+            }
+         }
+          function check_mob() {
+            var pattern = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
+            var mob= $("#form_mob").val();
+            if (pattern.test(mob) && mob !== ''&&mob.length==10) {
+               $("#mob_error_message").hide();
+               $("#form_mob")
+            } else {
+               $("#mob_error_message").html("Invalid Mobile NO");
+               $("#mob_error_message").show();
+               $("#form_mob")
+               error_mobno = true;
+            }
+         }
+
+         $("#registration_form").submit(function() {
+            error_name = false;
+            error_email = false;
+            error_mobno=false;
+            error_password=false;
+
+            check_name();
+            check_email();
+             check_mob();
+             check_password();
+
+            if (error_name === false  && error_email === false &&error_mobno===false &&error_password===false ) {
+               
+               return true;
+            } else {
+           swal("Oops!", "Please fill the Details!", "error");  
+               return false;
+        }
+         });
+     
+
+
+</script>

@@ -1,0 +1,151 @@
+{{!-- <style>
+  @media(max-width:990px){
+    .navbar-toggler {
+      position: absolute;
+      right: 30px;
+    }
+  }
+  
+  @media(max-width:500px){
+    #right {
+      position: absolute;
+      right: 0;
+      margin-left: 20rem;
+      margin-top: -5rem;
+    }
+    #welcome {
+      font-size: 10px;
+      margin-left: -1rem;
+    }
+  }
+</style> --}}
+
+{{!-- <nav
+  class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+  id="ftco-navbar"
+>
+  <div class="container">
+    <a class="navbar-brand" href="/"><span
+        class="flaticon-pizza-1 mr-1"
+      ></span>Pizza<br /><small>Delicious</small></a>
+       <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#ftco-nav"
+      aria-controls="ftco-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="oi oi-menu"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="/user/menu" class="nav-link">Menu</a></li>
+        {{#if User}}
+          <li class="nav-item"><a href="/order-status" class="nav-link">Order</a></li>
+        {{/if}}
+      </ul>
+    </div>
+
+    <div
+    id="welcome"
+      style="color: #FAC564; font-size:15px; margin-right:2rem; font-family: Nothing You Could Do, cursive; "
+    >
+      {{#if User}}
+						Welcome {{User.name}}
+						{{else}}
+      Welcome to Pizza Delicious
+      {{/if}}
+    </div>
+    <div class="right d-flex" id="right">
+      {{#if User}}
+					  <a href="/logout" class="btn btn-tranparent btn-outline-warning login-btn  px-3
+                  " style="color: #FAC564; border-radius:20px">Logout</a>
+			{{else}}
+      <a
+        href="/login"
+        class="btn btn-tranparent btn-outline-warning px-3"
+        style="color: #FAC564; border-radius:20px"
+      >Login</a>
+      {{/if}}
+      <div class="cart ml-3">
+        <a
+          href="/cart"
+          class="btn btn-tranparent btn-outline-warning px-3 position-relative"
+          style="color: #FAC564;border-radius:20px"
+        ><i class="bx bx-cart"></i>
+        {{#if cartCount}}
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge text-black rounded-pill bg-warning" id="cart-count"
+          >
+            {{cartCount}}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+          {{/if}}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</nav> --}}
+
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+		      <a class="navbar-brand" href="/"><span class="flaticon-pizza-1 mr-1"></span>Pizza<br><small>Delicous</small></a>
+		      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="oi oi-menu"></span> Menu
+		      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+          <div
+    id="welcome"
+      style="color: #FAC564; font-size:15px; margin-right:2rem; font-family: Nothing You Could Do, cursive; "
+    >
+      {{#if User}}
+						Welcome {{User.name}}
+						{{else}}
+      Welcome to Pizza Delicious
+      {{/if}}
+    </div>
+	        <ul class="navbar-nav ml-auto">
+	          <li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="/user/menu" class="nav-link">Menu</a></li>
+            {{#if User}}
+          <li class="nav-item"><a href="/order-status" class="nav-link">Order</a></li>
+        {{/if}}
+             <div class="right d-flex" id="right" style="margin-top: 10px;">
+      {{#if User}}
+					  <a href="/logout" class="btn btn-tranparent btn-outline-warning login-btn  px-3
+                  " style="color: #FAC564; border-radius:20px;width: 100%;
+    height: 43px;">Logout</a>
+			{{else}}
+      <a
+        href="/login"
+        class="btn btn-tranparent btn-outline-warning px-3"
+        style="color: #FAC564; border-radius:20px;width: 100%;
+    height: 43px;"
+      >Login</a>
+      {{/if}}
+      <div class="cart ml-3">
+        <a
+          href="/cart"
+          class="btn btn-tranparent btn-outline-warning px-3 position-relative"
+          style="color: #FAC564;border-radius:20px"
+        ><i class="bx bx-cart"></i>
+        {{#if cartCount}}
+          <span
+            class="position-absolute top-0 start-100 translate-middle badge text-black rounded-pill bg-warning" id="cart-count"
+          >
+            {{cartCount}}
+            <span class="visually-hidden">unread messages</span>
+          </span>
+          {{/if}}
+        </a>
+      </div>
+    </div>
+	        </ul>
+	      </div>
+		  </div>
+	  </nav>
+

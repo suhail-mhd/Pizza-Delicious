@@ -1,0 +1,44 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Edit Category</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Category</li>
+        <li class="breadcrumb-item active">Edit Category</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <div class="card">
+
+    <div class="card-body">
+      <section class="section">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row p-5">
+              <form
+                action="/admin/editcategorey/{{oneCategorey._id}}"
+                method="post"
+              >
+                <div class="form-group">
+                  <label for="exampleInputEmail1"  style="font-size:x-large;color: brown;">Edit category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="category"
+                    name="catname"
+                    value="{{oneCategorey.catname}}"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</main><!-- End #main -->

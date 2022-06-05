@@ -1,0 +1,66 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Add Category</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Banners</li>
+        <li class="breadcrumb-item active">Add Banner</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <div class="main_content_iner overly_inner">
+    <div
+      class="container-fluid glass-blur mt-5 p-5"
+      style="border-radius: 25px; "
+    >
+      <section>
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col-md-6">
+              <label
+                for="exampleInputEmail1"
+                style="font-size:x-large;color: #FAC564;"
+              >Add Banners</label>
+              <form
+                action="/admin/add-baner"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="mb-4">
+                  <label for="">Sub head</label>
+                  <input type="text" name="subname" required/><br />
+                </div>
+                <div class="mb-4">
+                  <label for="">Head</label>
+                  <input type="text" name="name" required/><br />
+                </div>
+                <div class="mb-4">
+                  <label for="">Description</label>
+                  <textarea
+                    class="glass-blur"
+                    style="height: 100px;width:100%"
+                    name="description"
+                    style="border-radius: 20px;"
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <label for="">Image</label>
+                  <input type="file" name="image" required/>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-success mt-4"
+                >Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</main><!-- End #main -->

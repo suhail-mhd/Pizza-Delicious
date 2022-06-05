@@ -1,0 +1,138 @@
+<div class="row my-5">
+  <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="row glass-blur pt-5 text-center">
+      {{!-- <hr class="my-4" /> --}}
+      {{#if totalValue}}
+      <div class="row mb-4 d-flex justify-content-between align-items-center">
+          {{#each products}}
+        <div class="col-md-2 col-lg-2 col-xl-2 mb-2">
+          <img
+            src="/add-product/{{this.product._id}}.jpg"
+            class="img-fluid rounded-3 rounded-pill w-50"
+          />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-3">
+          <h5 class="text-light">{{this.product.productname}}</h5>
+        </div>
+        <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+          <button
+            class="btn btn-link px-2 text-decoration-none" style="color: #000;background-color:#808080;width:5px;height:5px;border-radius:100%;position:relative"
+            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)"
+          > <i class='bx bx-minus' style="position: absolute;margin-top:-6px;margin-left:-6px;"></i></button>
+
+            <span id="{{this.product._id}}" class="mx-2">{{this.quantity}}</span>
+            
+          <button
+            class="btn btn-link px-2 text-decoration-none" style="color: #000;background-color:#808080;width:5px;height:5px;border-radius:100%;position:relative"
+            onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)"
+          ><i class='bx bx-plus' style="position: absolute;margin-top:-6px;margin-left:-6px;"></i></button>
+        </div>
+        <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 d-flex">
+          <h5 class="mb-0"><i class="bx bx-rupee"></i>{{this.product.price}}</h5>
+          {{#if this.product.offerPercentage}}
+            <del class="product-old-price" style="margin-left: 24px;margin-top: 2px;"><i class="bx bx-rupee"></i>{{this.product.OldPrice}}</del>
+          {{/if}}
+        </div>
+        <div class="col-md-1 col-lg-1 col-xl-1">
+          <a onclick="sweetAlertClick('{{this.product._id}}',event)" id="crossSign" href="" class="text-warning"><i class='bx bxs-trash'></i></a>
+        </div>
+        {{/each}}
+      <hr class="my-4" />
+      </div>
+
+
+      <div class="col-md-4 col-4 ml-auto" style="padding: 2rem;">
+        <div class="card-body">
+          <div class="text-center">
+          <h3>- Cart Total -</h3>
+          </div>
+
+          <div>
+            <h5>Total Amount : <i class="bx bx-rupee text-warning justify-content-between"></i><span id="total" class="text-warning">{{totalValue}}</span></h5>
+          </div>
+          <div class="text-center">
+            <a href="/place-order" class="btn btn-primary mb-2" style="width: 70%;border-radius:20px;">Place Order</a><br>
+            <a href="/" class="btn btn-outline-light text-light" style="width: 100%;margin-top: 5px;border-radius:20px;">Continue shopping</a>
+          </div>
+        </div>
+    </div>
+
+{{else}}
+    <div class="if-empty">
+            <h1>Cart Empty</h1>
+        <p>You probably haven’t ordered pizza yet.. <br> To order a pizza. go to the main page</p>
+        <img src="/assets/images/empty-cart.webp" style="width: 600px;" class="m-auto" alt="">
+        <div class="back-btn">
+        
+        <a href="/" class="btn btn-warning px-3 mb-5
+                  " style="color: #000; border-radius:20px; width:100px;height:40px;">Go Back</a>
+        </div>
+        </div>
+        {{/if}}
+        
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" 
+        integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6" 
+        crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+  function changeQuantity(cartId,proId,userId,count){
+        let quantity=parseInt(document.getElementById(proId).innerHTML)
+        count=parseInt(count)
+        $.ajax({
+            url:'/change-product-quantity',
+            data:{
+                user:userId,
+                cart:cartId,
+                product:proId,
+                count:count,
+                quantity:quantity
+            },
+            method:'post',
+            success:(response)=>{
+                 if(response.removeProduct){
+                     alert("Product Removed From Cart")
+                     location.reload()
+                 }else{
+                     document.getElementById(proId).innerHTML=quantity+count
+                     document.getElementById('total').innerHTML=response.total
+                 }
+                
+            } 
+
+        })
+    }
+</script>
+
+<script>
+  
+  function sweetAlertClick(id, e) {
+
+    e.preventDefault()
+    swal({
+      title: "Are you sure?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Your product removed from cart!", {
+            icon: "success",
+          }).then(() => {
+            window.location.href = `/removeCartItem/${id}`
+          })
+
+        } else {
+          swal("Your product is safe!");
+        }
+      });
+  }
+
+</script>

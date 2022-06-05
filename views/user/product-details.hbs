@@ -1,0 +1,105 @@
+<div class="row my-5">
+  <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="row glass-blur pt-5">
+      <div
+        class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12 pr-xl-0 pr-lg-0 pr-md-0 m-b-30" style="margin-top: -7rem;"
+      >
+        <div class="product-slider">
+          <div
+            id="productslider-1"
+            class="product-carousel carousel slide"
+            data-ride="carousel"
+          >
+
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                {{!-- <div id="main-img"> --}}
+                <img
+                  src="/add-product/{{proDetails._id}}.jpg"
+                  alt="First slide"
+                  style="border-radius: 100%; width: 345px; height: 387px;"
+                  id="productImg"
+                />
+                {{!-- </div> --}}
+                <div class="row small-img-row d-flex mx-auto d-block mt-3 justify-content-center text-center">
+                 
+                    <img
+                      class="small-img"
+                      src="/add-product/{{proDetails._id}}image2.jpg"
+                      alt="First slide"
+                      style="border-radius: 100%; width:110px; height:90px"
+                    />
+                 
+                 
+                    <img
+                      class="small-img"
+                      src="/add-product/{{proDetails._id}}image3.jpg"
+                      alt="First slide"
+                      style="border-radius: 100%; width:110px; height:90px"
+                    />
+                 
+                 
+                    <img
+                      class="small-img"
+                      src="/add-product/{{proDetails._id}}.jpg"
+                      alt="First slide"
+                      style="border-radius: 100%; width:110px; height:90px"
+                    />
+                 
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12 pl-xl-0 pl-lg-0 pl-md-0 m-b-30"
+      >
+        <div class="product-details">
+          <div class="border-bottom pb-3 mb-3">
+            <h2 class="mb-3">{{proDetails.productname}}</h2>
+            <div class="product-rating d-inline-block float-right">
+              <i class="fa fa-fw fa-star"></i>
+              <i class="fa fa-fw fa-star"></i>
+              <i class="fa fa-fw fa-star"></i>
+              <i class="fa fa-fw fa-star"></i>
+              <i class="fa fa-fw fa-star"></i>
+            </div>
+            <h3 class="mb-0 text-warning"><i
+                class="bx bx-rupee"
+              ></i>{{proDetails.price}}</h3>
+          </div>
+          <div class="product-colors borderbo-bottom">
+            <h4>Category</h4>
+            <input
+              type="text"
+              class="category"
+              value="{{proDetails.category}}"
+            />
+          </div>
+          <div class="product-size border-bottom">
+            <div class="product-qty" style="margin-top: -6rem;">
+              <h4>Quantity</h4>
+              <div class="quantity">
+                <input type="number" value="1" />
+              </div>
+            </div>
+          </div>
+          <div class="product-description">
+            <h4 class="mb-1">Descriptions</h4>
+            <p>{{proDetails.description}}</p>
+            <button onclick="addToCart('{{proDetails._id}}')" class="btn btn-primary btn-block btn-lg">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+
+

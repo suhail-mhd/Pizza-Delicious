@@ -1,0 +1,37 @@
+<section class="sec">
+  <div class="colour"></div>
+  <div class="colour"></div>
+  <div class="colour"></div>
+  <div class="box">
+    <div class="square" style="--i:0;"></div>
+    <div class="square" style="--i:1;"></div>
+    <div class="square" style="--i:2;"></div>
+    <div class="square" style="--i:3;"></div>
+    <div class="square" style="--i:4;"></div>
+    <div class="container glass">
+      <div class="form">
+        <h2>Login Form</h2>
+        <form action="/login" method="post">
+          {{#if Error}}
+            <label for="" style="color: red;">{{Error}}</label>
+          {{/if}}
+          <div class="input__box">
+            <input type="email" name="email" placeholder="email" required/>
+          </div>
+          <div class="input__box">
+            <input type="password" name="password" placeholder="Password" required/>
+          </div>
+          <div class="input__box">
+            <input type="submit" value="Login" />
+          </div>
+            <a href="/otp"><p
+                class="forget float-right"
+              >Login with OTP</p>
+            </a>
+          <p class="forget mt-5">Don't have an account?
+            <a href="/signup">Sign Up</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

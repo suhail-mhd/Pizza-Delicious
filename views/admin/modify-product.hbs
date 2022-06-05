@@ -1,0 +1,75 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Product Grid</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Products</li>
+        <li class="breadcrumb-item active">Products Grid</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      {{#each products}}
+        <div class="col-lg-4">
+
+          <div class="card glass-blur" style="width: 18rem; height:400px">
+            <img
+              src="/add-product/{{this._id}}.jpg"
+              class="Image"
+              alt=""
+              style="height: 200px; border-radius:20px 20px 0 0"
+            />
+            <div class="card-body">
+              <div class="d-flex">
+                <h5 class="card-title text-light">{{this.productname}}</h5>
+                <div class="mt-4 ml-auto text-warning font-weight-bold"><i class="bx bx-rupee"></i>{{this.price}}</div>
+              </div>
+              <div class="d-flex mb-3">
+                <div class="category">{{this.category}}</div>
+                /
+                <div class="quantity">{{this.quantity}}</div>
+              </div>
+              {{!-- <p class="card-text" style="font-size: 12px;">{{this.description}}</p> --}}
+              <div class="d-flex">
+                <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary"><i class="bi bi-pen"></i></a>
+                <a onclick="sweetAlertClick('{{this._id}}',event)" href="" class="btn btn-primary ml-auto"><i class='bx bx-trash'></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      {{/each}}
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+<script>
+  function sweetAlertClick(id, e) {
+    
+    e.preventDefault()
+    swal({
+      title: "Are you sure?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("Your product removed from list!", {
+            icon: "success",
+          }).then(() => {
+            window.location.href = `/admin/delete/${id}`
+          })
+
+        } else {
+          swal("Your product is safe!");
+        }
+      });
+  }
+
+</script>

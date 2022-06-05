@@ -1,0 +1,43 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Edit Banner</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Banners</li>
+        <li class="breadcrumb-item active">Edit Banner</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+<section>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Edit Baner</h2>
+                <form action="/admin/edit-baner/{{Baner._id}}" method="post" enctype="multipart/form-data">
+                    <label for="">Sub Head</label>
+                    <input type="text" name="subname" class="form-control" value="{{Baner.subname}}">
+                    <label for="">Head</label>
+                    <input type="text" name="name" class="form-control" value="{{Baner.name}}">
+                    <label for="">Description</label>
+                    <input type="text" name="description" class="form-control" value="{{Baner.description}}">
+                    <label for="">Image</label>
+                    <img src="/baner-images/{{Baner._id}}.jpg" alt="" style="width: 100px; height:auto" id="imgView"
+                        class="pt-3 pb-3">
+                    <input name="image" type="file" class="form-control" onchange="viewImage(event)">
+                    <button type="submit" class="btn btn-success mt-4">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main><!-- End #main -->
+
+<script>
+    function viewImage(event) {
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>

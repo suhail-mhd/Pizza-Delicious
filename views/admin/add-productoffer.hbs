@@ -1,0 +1,134 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Add Product Offer</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Offers</li>
+        <li class="breadcrumb-item active">Add Product Offer</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+<section>
+    <div class="container align-items-center glass-blur" style="padding-top: 4rem;">
+        <div class="justify-content-center d-flex">
+
+<form method="post" id="product" onsubmit="return validate()" action="/admin/add-product-offer" class="px-md-2 pt-3">
+            <div class="col-md-12 text-center">
+                <h1 style="font-size:x-large;color: #FAC564;">Add Offer</h1>
+            </div>
+            <div class="col-md-12 card-product pt-4">
+               <div class="row">
+                        <div class="col-md-12 d-flex m-4">
+                   <span class="error_form" id="percentage_error_message"></span>
+                   <label class="form-label" for="form3Example1q">Offers In Percentage</label>
+                <input type="number" id="form_percentage" name="discount" class="form-control" required/>
+              <p id="cvalueerr" class="text-danger"></p>
+                 <input type="text" value="{{ProdId}}" name="ProdId" hidden>
+              {{!-- <div class="row">
+                <div class="col-md-6 mb-4">
+                 <input type="text" value="product" name="offertype" hidden>
+                  <div class="form-outline datepicker pt-2">
+                      <span class="error_form" id="date_error_message"></span>
+
+                    <label for="exampleDatepicker1" class="form-label">Select a date</label>
+                    <input
+                      type="date"
+                      name="validity"
+                      class="form-control"
+                      id="exp_date"
+                      required
+                    />
+                  </div>
+
+                </div>
+                
+              </div> --}}
+
+              
+
+              
+
+            </div>
+            </div>
+            <div class="text-center pb-4" style="margin-top: -1rem;">
+              <button type="submit" class="btn btn-success btn-lg  mt-4">Submit</button>
+              </div>
+            </div>
+            </form>
+
+
+
+            
+        </div>
+    </div>
+</section>
+
+</main><!-- End #main -->
+
+	<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" 
+        integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6" 
+        crossorigin="anonymous">
+</script>
+
+<script>
+    //validation
+    function prosubmit() {
+        var offerType = document.formpro.offerType;
+        var items = document.formpro.items;
+        var price = document.formpro.price;
+        var validity = document.formpro.validity;
+        if (offerType.value.length <= 0) {
+            document.getElementById('err').innerHTML = 'Offer Type is required'
+            offerType.focus();
+            return false;
+        } else if (items.value.length <= 0) {
+            document.getElementById('err1').innerHTML = 'Offer Type is required'
+            items.focus();
+            return false;
+        } else if (validity.value.length <= 0) {
+            document.getElementById('err2').innerHTML = 'Offer validity is required'
+            validity.focus();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
+    //product offer
+    $('#proOfferForm').submit((e) => {
+        console.log("Offer ajax called");
+        e.preventDefault()
+        $.ajax({
+            url: '/admin/add-productoffer',
+            method: 'post',
+            data: $('#proOfferForm').serialize(),
+            success: (response) => {
+                if (response.Exist) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'This Product Offer already Exist !',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Offer Successfully Added !',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000)
+                }
+            }
+        })
+    })
+</script>

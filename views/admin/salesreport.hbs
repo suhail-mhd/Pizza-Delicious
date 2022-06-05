@@ -1,0 +1,123 @@
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Sales Report</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Sales report</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <div class="col-12">
+    <form id="salesDate-form">
+      <div class="mb-4">
+        <header class="glass-blur py-3">
+          <div class="row align-items-center">
+            <div class="col col-check flex-grow-0">
+            </div>
+            <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+            </div>
+            <div class="col-md-2 col-6">
+              <select
+                class="form-select glass-blur d-block d-inline-block"
+                id="status_sales"
+                style="max-width: 200px"
+                onchange="getNewSale()"
+              >
+                <option>Select</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+            <div class="col-md-2 col-6">
+              <input
+                type="date"
+                style="height: 39px;"
+                id="exp_date1"
+                name="from"
+                class="form-control glass-blur"
+                required
+              />
+            </div>
+            <div class="col-md-2 col-6">
+              <input
+                type="date"
+                style="height: 39px;"
+                id="exp_date2"
+                name="to"
+                class="form-control glass-blur"
+                required
+              />
+            </div>
+            <div class="col-md-2 col-6">
+              <button
+                class="btn btn-primary me-md-2"
+                type="submit"
+                style="border-radius:20px; background-color:#fac564; color:#000; padding: 9px 16px;"
+              >Submit</button>
+            </div>
+          </div>
+        </header>
+      </div>
+    </form>
+  </div>
+
+  <div class="card glass-blur p-3">
+    <div class="card-body">
+      <div class="QA_table mb_30">
+        <table id="example" class="table table-hover text-light">
+          <thead>
+            <tr>
+              <th class="text-warning">No</th>
+              <th class="text-warning" scope="col">order ID</th>
+              <th class="text-warning" scope="col">User ID</th>
+              <th class="text-warning" scope="col">Payment</th>
+              <th class="text-warning" scope="col">Amount</th>
+              <th class="text-warning" scope="col">Date</th>
+
+            </tr>
+          </thead>
+          <tbody id="examplebody">
+            {{#each salesreport}}
+              <tr>
+                <td>{{inc @index}}</td>
+                <td>{{_id}}</td>
+                <td>{{userId}}</td>
+                <td><span
+                    class="badge rounded-pill alert-success"
+                  >{{paymentMethod}}</span></td>
+                <td><i class="bx bx-rupee"></i>{{totalAmount}}</td>
+                <td>{{date}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </div>
+
+</main><!-- End #main -->
+
+<style>
+  [type=button]:not(:disabled){
+    visibility: visible;
+    padding: 3px 10px;
+    background-color: #fac564;
+    color: #000;
+    border: none;
+  }
+
+  button:not(:disabled) span {
+    color: #000;
+  }
+</style>
+
+
+

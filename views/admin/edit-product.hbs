@@ -1,0 +1,151 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Edit Product</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Products</li>
+        <li class="breadcrumb-item active">Edit Product</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="card glass-blur">
+          <div class="card-body">
+            <h5 class="card-title">Edit Product</h5>
+
+            <!-- General Form Elements -->
+            <form action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+              <div class="row mb-3">
+                <div class="col-lg-6">
+                  <label for="inputText" class="col-sm-12 col-form-label">Product
+                    Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="productname" value="{{product.productname}}" />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">Category</label>
+                    <div class="col-sm-9">
+                     <input
+                      type="text"
+                    
+                      name="category"
+                      value="{{product.category}}"
+                    />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                  <div class="col-lg-6">
+                <label
+                  for="inputNumber"
+                  class="col-sm-12 col-form-label"
+                >Quantity</label>
+                <div class="col-sm-10">
+                  <input type="number" name="quantity" value="{{product.quantity}}" />
+                </div>
+                  </div>
+                  <div class="col-lg-6">
+                <label
+                  for="inputNumber"
+                  class="col-sm-2 col-form-label"
+                >Price</label>
+                <div class="col-sm-10">
+                  <input type="text" name="price" value="{{product.price}}" />
+                </div>
+                  </div>
+              </div>
+              <div class="row mb-3">
+                <label
+                  for="inputPassword"
+                  class="col-sm-2 col-form-label"
+                >Description</label>
+                <div class="col-sm-10">
+                  <input
+                  
+                    style="height: 100px;width:100%"
+                    name="description"
+                    value="{{product.description}}"
+                    
+                  ></input>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">
+                  Image</label>
+                <img src="/add-product/{{product._id}}.jpg" id="imgView" alt="" style="width:100px;height:auto;" />
+                <input
+                  type="file"
+                  id="id_image1"
+                  name="Image"
+                  accept="image/*"
+                  onchange="viewImage(event)"
+                /><br />
+                <div id="image-box1" class="image-container"></div>
+              </div>
+
+              <div class="mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">
+                  Sub Image1</label>
+                <img src="/add-product/{{product._id}}image2.jpg" id="imgView1" alt="" style="width:100px;height:auto;" />
+                <input
+                  type="file"
+                  id="id_image1"
+                  name="Image2"
+                  accept="image/*"
+                  onchange="viewImage1(event)"
+                /><br />
+                <div id="image-box1" class="image-container"></div>
+              </div>
+
+              <div class="mb-3">
+                <label for="inputNumber" class="col-sm-2 col-form-label">
+                  Sub Image2</label>
+                <img src="/add-product/{{product._id}}image3.jpg" id="imgView2" alt="" style="width:100px;height:auto;" />
+                <input
+                  type="file"
+                  id="id_image1"
+                  name="Image3"
+                  accept="image/*"
+                  onchange="viewImage2(event)"
+                /><br />
+                <div id="image-box1" class="image-container"></div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-sm-10 ml-auto">
+                  <button type="submit" class="btn btn-primary">Update Product</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+<script>
+    function viewImage(event){
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+    function viewImage1(event){
+        document.getElementById('imgView1').src = URL.createObjectURL(event.target.files[1])
+    }
+    function viewImage2(event){
+        document.getElementById('imgView2').src = URL.createObjectURL(event.target.files[2])
+    }
+</script>

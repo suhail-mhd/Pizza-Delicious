@@ -1,0 +1,150 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Add Category Offer</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item">Offers</li>
+        <li class="breadcrumb-item active">Add Category Offer</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+<section>
+    <div class="container align-items-center glass-blur" style="padding-top: 4rem;">
+        <div class="justify-content-center d-flex">
+            <form id="CateOfferForm" method="post" name="formpro" onsubmit="return prosubmit()">
+                <div class="col-md-12 text-center">
+                    <h1 style="font-size:x-large;color: #FAC564;">Add Offer</h1>
+                </div>
+                <div class="col-md-12 card-product pt-4">
+                    <div class="row">
+                        <div class="col-md-12 d-flex m-4">
+                            <div class="font-weight-bold text-uppercase mt-2 mr-5">Offer Name</div>
+                            <div class="ml-3">
+                                <input type="text" class="col-md-6 col-sm-4 col-4 ml-2" name="offerType" required>
+                                <small id="err"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 d-flex m-4">
+                            <div class="font-weight-bold text-uppercase mt-2 mr-5">Category</div>
+                            <div class="ml-3">
+                                <select name="offerItem" class="glass-blur p-2" id="category">
+                                    {{!-- <option value="selectcard">Select</option> --}}
+                                    {{#each categories}}
+                                    <option value="{{this.catname}}" name="offerType">{{this.catname}}</option>
+                                    {{/each}}
+                                    required
+                                </select>
+                                <small id="err"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 d-flex m-4">
+                            <div class="font-weight-bold text-uppercase mt-2 mr-5">Offer Percentage</div>
+                            <div class="ml-3">
+                                <input type="number" name="discount" maxlength="2" min="1" max="99" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 d-flex m-4">
+                            <div class="font-weight-bold text-uppercase mt-2 mr-5">Expiry</div>
+                            <div class="ml-3">
+                                <input id="exp_date" name="validity" type="date" required>
+                                <small id="err2"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4 pb-4">
+                        <button class="btn btn-warning" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+  
+</main><!-- End #main -->
+
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" 
+        integrity="sha384-JUMjoW8OzDJw4oFpWIB2Bu/c6768ObEthBMVSiIx4ruBIEdyNSUQAjJNFqT5pnJ6" 
+        crossorigin="anonymous">
+</script>
+
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#exp_date').attr('min', today);
+
+
+    function prosubmit() {
+
+        var offerType = document.formpro.offerType;
+        var offerItem = document.formpro.offerItem;
+        var discount = document.formpro.discount;
+        var validity = document.formpro.validity;
+
+        if (offerType.value.length <= 0) {
+            document.getElementById('err').innerHTML = 'Offer Type is required'
+            offerType.focus();
+            return false;
+        } else if (offerItem.value.length <= 0) {
+            document.getElementById('err1').innerHTML = 'Offer Item is required'
+            offerItem.focus();
+            return false;
+        } else if (validity.value.length <= 0) {
+            document.getElementById('err2').innerHTML = 'Offer validity is required'
+            validity.focus();
+            return false;
+        } else if (discount.value.length <= 0) {
+            document.getElementById('err3').innerHTML = 'Offer discount is required'
+            discount.focus();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //Category form Submit
+
+    $('#CateOfferForm').submit((e) => {
+        e.preventDefault()
+        $.ajax({
+            url: '/admin/addCategoryOffer',
+            method: 'post',
+            data: $('#CateOfferForm').serialize(),
+            success: (response) => {
+                if (response.Exist) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'This category aready Exist!',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Offer Successfully Added !',
+                        showConfirmButton: false,
+                        timer: 2500
+                    })
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000)
+                }
+            }
+        })
+    })
+
+</script>

@@ -1,0 +1,120 @@
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Coupons</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Coupons</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <div class="main_content_iner">
+    <div class="container-fluid p-0">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="white_card card_height_100 mb_30">
+            <div class="white_card_header">
+              <div class="box_header m-0">
+                <div class="main-title">
+                  {{! <h3 class="m-0">Coupons</h3> }}
+                </div>
+              </div>
+            </div>
+            <div class="white_card_body">
+              <div class="QA_section">
+                <div class="white_box_tittle list_header">
+                  <div class="box_right d-flex lms_block">
+
+                    <div class="add_button ml-auto mb-3">
+                      <a href="/admin/add-coupons" type="submit"><button
+                          type="button"
+                          class="btn btn-warning"
+                        >Add Coupon</button></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card glass-blur p-3">
+                  <div class="card-body">
+                    <div class="QA_table mb_30">
+                      <!-- table-responsive -->
+                      <table
+                        class="table lms_table_active3 text-light"
+                        id="productTable"
+                      >
+                        <thead>
+                          <tr>
+                            <th class="text-warning" scope="col">No</th>
+                            <th class="text-warning" scope="col">Coupon</th>
+                            <th
+                              class="text-warning"
+                              scope="col"
+                            >Description</th>
+                            <th class="text-warning" scope="col">Discount</th>
+                            <th class="text-warning" scope="col">Expired on</th>
+                            <th class="text-warning" scope="col">Manage</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {{#each coupons}}
+                            <tr>
+                              <th class="text-light" scope="row">{{inc
+                                  @index
+                                }}</th>
+                              <td>{{this.couponcode}}</td>
+                              <td>{{this.description}}</td>
+                              <td>{{this.discount}} %</td>
+                              <td>{{this.expiry}}</td>
+                              <td>
+                                <a
+                                  href="/admin/delete-coupon/{{this._id}}"
+                                  class="btn btn-danger"
+                                  style="border-radius: 20px;"
+                                  onclick="return two(this,event)"
+                                ><i class='bx bx-trash'></i></a>
+                              </td>
+                            </tr>
+                          {{/each}}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main><!-- End #main -->
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+          function two(url,e) {
+              e.preventDefault()
+              swal({
+                  title: "Are you sure?",
+                  text: "Once removed, you won't be able to retrive it! ",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  
+                  if (willDelete) {
+                    
+                    window.location.href= url.href
+               
+      
+                  } else {
+                    swal("your Coupon is safe!");
+                  }
+                });
+      
+      
+      }
+      </script>
