@@ -10,7 +10,7 @@ const banerHelpers = require('../helpers/banner-helpers')
 const createReferal = require('referral-code-generator')
 const dotenv = require('dotenv');
 const async = require('hbs/lib/async');
-dotenv.config()
+require("dotenv").config();
 const paypal = require("paypal-rest-sdk");
 const twilio = require("twilio");
 
@@ -19,16 +19,16 @@ const twilio = require("twilio");
 
 
 // var messagebird = require('messagebird')('BIok4xyzLn5bMwAoOB6CT54Xn')
-const accountSid = "AC237bb1616b8f11d5e623b26e2a7a9f8c";
-const authToken = "bace92a0d668ce5828873737c0358d41";
-const serviceId = "VAe02768dd99565de4bcf1bd9b05310e97"
+const accountSid = process.env.TWILIO_accountSid;
+const authToken = process.env.TWILIO_authToken;
+const serviceId = process.env.TWILIO_serviceId;
 const client = new twilio(accountSid, authToken);
 
 paypal.configure({
   mode: "sandbox", //sandbox or live
-  client_id: 'ARrYp44rT_sazXwae4x0sWxiBSHYMuBV4PKrA9FDsNYg5Dtm8RnfuTg8kZuUpDKt2KBqwzX6-vU-FijE',
+  client_id: process.env.PAYPAL_CLIENT_ID,
 
-  client_secret: 'EGZgTcCLAf2Jk4p8ahFuWeha3COthIiVqnpDYg5zQ3w_vpxOtWKLPofrZTdk61qvrBCoc2nbrnNtIKQI'
+  client_secret: process.env.PAYPAL_CLIENT_SECRET
 });
 
 
@@ -641,7 +641,7 @@ router.get('/wallet', verifyLogin, async (req, res) => {
   let userId = user._id;
   let refer=user.refer
   let wallet=user.wallet
-  let referalLink='http://localhost:3000/signup?refer='+refer
+  let referalLink='https://pizzadelicious.in/signup?refer='+refer
 
 
   if (req.session.user) {
