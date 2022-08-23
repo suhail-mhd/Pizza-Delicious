@@ -1,4 +1,4 @@
-# pizza-delicious
+# Pizza-Delicious
 
 # About the Project
 
