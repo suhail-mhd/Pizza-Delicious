@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www -e hbs,js"
+    "start": "nodemon ./bin/www -e hbs,js",
+    "build": "npm i"
   },
   "dependencies": {
     "@cloudcmd/read-files-sync": "^2.0.2",
